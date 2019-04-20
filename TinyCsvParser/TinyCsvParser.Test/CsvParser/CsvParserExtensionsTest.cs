@@ -20,7 +20,7 @@ namespace TinyCsvParser.Test.CsvParser
             public DateTime BirthDate { get; set; }
         }
 
-        private class CsvPersonMapping : CsvMapping<Person>
+        private class CsvPersonMapping : CsvMapping<Person>, ICsvMapping<Person>
         {
             public CsvPersonMapping()
             {
@@ -35,7 +35,7 @@ namespace TinyCsvParser.Test.CsvParser
         public void ReadFromFile_null_Test()
         {
             CsvParserOptions csvParserOptions = new CsvParserOptions(true, ';', 1, true);
-            CsvPersonMapping csvMapper = new CsvPersonMapping();
+            ICsvMapping<Person> csvMapper = new CsvPersonMapping();
             CsvParser<Person> csvParser = new CsvParser<Person>(csvParserOptions, csvMapper);
 
             Assert.Throws<ArgumentNullException>(() => csvParser.ReadFromFile(null, Encoding.UTF8));
@@ -45,7 +45,7 @@ namespace TinyCsvParser.Test.CsvParser
         public void ReadFromFileTest()
         {
             CsvParserOptions csvParserOptions = new CsvParserOptions(true, ';', 1, true);
-            CsvPersonMapping csvMapper = new CsvPersonMapping();
+            ICsvMapping<Person> csvMapper = new CsvPersonMapping();
             CsvParser<Person> csvParser = new CsvParser<Person>(csvParserOptions, csvMapper);
 
             var stringBuilder = new StringBuilder()
@@ -87,7 +87,7 @@ namespace TinyCsvParser.Test.CsvParser
         public void ReadFromStream_null_Test()
         {
             CsvParserOptions csvParserOptions = new CsvParserOptions(true, ';', 1, true);
-            CsvPersonMapping csvMapper = new CsvPersonMapping();
+            ICsvMapping<Person> csvMapper = new CsvPersonMapping();
             CsvParser<Person> csvParser = new CsvParser<Person>(csvParserOptions, csvMapper);
 
             Assert.Throws<ArgumentNullException>(() => csvParser.ReadFromStream(null, Encoding.UTF8));
@@ -97,7 +97,7 @@ namespace TinyCsvParser.Test.CsvParser
         public void ReadFromStreamTest()
         {
             CsvParserOptions csvParserOptions = new CsvParserOptions(true, ';', 1, true);
-            CsvPersonMapping csvMapper = new CsvPersonMapping();
+            ICsvMapping<Person> csvMapper = new CsvPersonMapping();
             CsvParser<Person> csvParser = new CsvParser<Person>(csvParserOptions, csvMapper);
 
             var stringBuilder = new StringBuilder()

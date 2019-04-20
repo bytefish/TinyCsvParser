@@ -13,9 +13,9 @@ namespace TinyCsvParser
         where TEntity : class, new()
     {
         private readonly CsvParserOptions options;
-        private readonly CsvMapping<TEntity> mapping;
+        private readonly ICsvMapping<TEntity> mapping;
 
-        public CsvParser(CsvParserOptions options, CsvMapping<TEntity> mapping)
+        public CsvParser(CsvParserOptions options, ICsvMapping<TEntity> mapping)
         {
             this.options = options;
             this.mapping = mapping;

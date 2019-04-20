@@ -29,6 +29,14 @@ namespace TinyCsvParser.TypeConverter
 
         protected override bool InternalConvert(string value, out TTargetType result)
         {
+            char charResult;
+            if (Char.TryParse(value, out charResult))
+            {
+                if (Enum.IsDefined(typeof(TTargetType), (int)charResult))
+                {
+                    return Enum.TryParse<TTargetType>(((int)charResult).ToString(), ignoreCase, out result);
+                }
+            }
             return Enum.TryParse<TTargetType>(value, ignoreCase, out result);
         }
     }

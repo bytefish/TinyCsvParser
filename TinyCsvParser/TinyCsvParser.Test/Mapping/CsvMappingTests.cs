@@ -17,7 +17,7 @@ namespace TinyCsvParser.Test.Mapping
             public int PropertyInt { get; set; }
         }
 
-        private class DuplicateMapping : CsvMapping<SampleEntity>
+        private class DuplicateMapping : CsvMapping<SampleEntity>, ICsvMapping<SampleEntity>
         {
             public DuplicateMapping()
             {
@@ -32,7 +32,7 @@ namespace TinyCsvParser.Test.Mapping
             Assert.Throws<InvalidOperationException>(() => new DuplicateMapping());
         }
 
-        private class WrongColumnMapping : CsvMapping<SampleEntity>
+        private class WrongColumnMapping : CsvMapping<SampleEntity>, ICsvMapping<SampleEntity>
         {
             public WrongColumnMapping()
             {
@@ -52,7 +52,7 @@ namespace TinyCsvParser.Test.Mapping
             Assert.AreEqual("A|1", result.Error.UnmappedRow);
         }
 
-        private class CorrectColumnMapping : CsvMapping<SampleEntity>
+        private class CorrectColumnMapping : CsvMapping<SampleEntity>, ICsvMapping<SampleEntity>
         {
             public CorrectColumnMapping()
             {

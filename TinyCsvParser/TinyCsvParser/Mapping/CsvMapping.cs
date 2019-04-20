@@ -10,8 +10,8 @@ using TinyCsvParser.Model;
 
 namespace TinyCsvParser.Mapping
 {
-    public abstract class CsvMapping<TEntity>
-        where TEntity : class, new()
+    public abstract class CsvMapping<TEntity> : ICsvMapping<TEntity>
+            where TEntity : class, new()
     {
         private class IndexToPropertyMapping
         {
@@ -53,7 +53,7 @@ namespace TinyCsvParser.Mapping
 
             var propertyMapping = new CsvPropertyMapping<TEntity, TProperty>(property, typeConverter);
 
-           AddPropertyMapping(columnIndex, propertyMapping);
+            AddPropertyMapping(columnIndex, propertyMapping);
 
             return propertyMapping;
         }
@@ -117,10 +117,10 @@ namespace TinyCsvParser.Mapping
             };
         }
 
-        
+
         public override string ToString()
         {
-            var csvPropertyMappingsString =  string.Join(", ", csvPropertyMappings.Select(x => x.ToString()));
+            var csvPropertyMappingsString = string.Join(", ", csvPropertyMappings.Select(x => x.ToString()));
 
             return $"CsvMapping (TypeConverterProvider = {typeConverterProvider}, Mappings = {csvPropertyMappingsString})";
         }

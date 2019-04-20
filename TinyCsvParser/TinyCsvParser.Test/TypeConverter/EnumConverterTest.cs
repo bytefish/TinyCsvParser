@@ -9,7 +9,9 @@ namespace TinyCsvParser.Test.TypeConverter
 {
     public enum TestEnum
     {
-        A = 1
+        A = 1,
+        Abc = '2',
+        B = 'B'
     }
 
     [TestFixture]
@@ -27,13 +29,16 @@ namespace TinyCsvParser.Test.TypeConverter
             {
                 return new[] {
                     MakeTuple("A", TestEnum.A),
+                    MakeTuple("Abc", TestEnum.Abc),
+                    MakeTuple("2", TestEnum.Abc),
+                    MakeTuple("B", TestEnum.B),
                 };
             }
         }
 
         protected override string[] FailTestData
         {
-            get { return new[] { "B", string.Empty, "a", null }; }
+            get { return new[] { "C", string.Empty, "a", null }; }
         }
     }
 
@@ -52,13 +57,14 @@ namespace TinyCsvParser.Test.TypeConverter
                 return new[] {
                     MakeTuple("A", TestEnum.A),
                     MakeTuple("a", TestEnum.A),
+                    MakeTuple("abc", TestEnum.Abc),
                 };
             }
         }
 
         protected override string[] FailTestData
         {
-            get { return new[] { "B", " ", string.Empty, null }; }
+            get { return new[] { "C", " ", string.Empty, null }; }
         }
     }
 
